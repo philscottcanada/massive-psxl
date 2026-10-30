@@ -196,7 +196,7 @@ T(title="Acid bass", group="Bass", preset="Acid Line, Mono Acid Lead",
   ],
   mods=[("Mod 2", "Filter 1 Cutoff", "+0.34", "Each retriggered note snaps the filter open then closes it.")],
   tips=["Accents: drag the <b>Velocity</b> chip (left of the macro strip) onto Filter 1 Cutoff at +0.2 and play some notes harder.",
-        "Higher Reso gives the squelch; above 0.9 the ladder starts to self-oscillate.",
+        "Higher Reso gives the squelch; near the top of the range the ladder rings almost like a sine.",
         "Add Delay (Sync on, Division 1/8, Mix 0.2) and Dist Mix 0.2 for the classic dirty acid sound."])
 
 T(title="Reese bass", group="Bass", preset="Reese Beast",

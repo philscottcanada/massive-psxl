@@ -324,8 +324,9 @@ voice("Glitch Stutter", X, wt1=GRIT, pos1=0.5, cut=3000, res=0.3, ins=dict(ins_t
 # ==================================================================================================
 Q = "Sequence"
 def semis(*s): return [round(x / 12.0, 3) for x in s] + [0.0] * (16 - len(s))
+def semis24(*s): return [round(x / 24.0, 3) for x in s] + [0.0] * (16 - len(s))   # amount 0.25 = 24 semitones per full bar
 voice("Minor Arp", Q, wt1=BASIC, pos1=0.66, cut=2600, res=0.25, amp=(0.001, 0.2, 0.8, 0.1), fenv=(0.25, 0.001, 0.15, 0.2, 0.1),
-      assigns=[(PERF(1), "o1_pitch", 0.125)], extra=dict(p1_steps=8, p1_sync=1, p1_div=4), perf={1: semis(0, 3, 7, 12, 15, 12, 7, 3)}, fx=dict(dly_mix=0.25, dly_sync=1, dly_div=3, rev_mix=0.2))
+      assigns=[(PERF(1), "o1_pitch", 0.25)], extra=dict(p1_steps=8, p1_sync=1, p1_div=4), perf={1: semis24(0, 3, 7, 12, 15, 12, 7, 3)}, fx=dict(dly_mix=0.25, dly_sync=1, dly_div=3, rev_mix=0.2))
 voice("Major Arp", Q, wt1=PULSE, pos1=0.3, cut=3200, res=0.2, amp=(0.001, 0.2, 0.8, 0.1), assigns=[(PERF(1), "o1_pitch", 0.125)], extra=dict(p1_steps=6, p1_sync=1, p1_div=4),
       perf={1: semis(0, 4, 7, 12, 7, 4)}, fx=dict(dly_mix=0.25, dly_sync=1, dly_div=3, rev_mix=0.2))
 voice("Gate Pad", Q, wt1=BASIC, pos1=0.66, uni1=5, det1=18, cut=3500, res=0.1, amp=(0.01, 0.3, 1.0, 0.3), assigns=[(PERF(1), "amp_level", 0.75)], extra=dict(p1_steps=8, p1_sync=1, p1_div=4, amp_level=0.0),

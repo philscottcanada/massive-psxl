@@ -56,7 +56,7 @@ FW = 504.0
 
 
 def _ps(name, **kw):
-    base = dict(fontName="Helvetica", fontSize=9.5, leading=13.6, textColor=INK, spaceAfter=5, alignment=TA_LEFT)
+    base = dict(fontName="Helvetica", fontSize=9.2, leading=12.9, textColor=INK, spaceAfter=5, alignment=TA_LEFT)
     base.update(kw)
     return ParagraphStyle(name, **base)
 
@@ -74,8 +74,8 @@ S = {
     "cellh": _ps("cellh", fontName="Helvetica-Bold", fontSize=8.2, leading=10.6, textColor=colors.white, spaceAfter=0),
     "cell7": _ps("cell7", fontSize=7.6, leading=9.8, spaceAfter=0),
     "cellc": _ps("cellc", fontSize=8.2, leading=10.6, spaceAfter=0, alignment=TA_CENTER),
-    "toc0": _ps("toc0", fontName="Helvetica-Bold", fontSize=10.5, leading=15, textColor=INDIGO, spaceBefore=5, spaceAfter=1),
-    "toc1": _ps("toc1", fontSize=9, leading=12, leftIndent=16, textColor=INK, spaceAfter=0),
+    "toc0": _ps("toc0", fontName="Helvetica-Bold", fontSize=9.8, leading=12.5, textColor=INDIGO, spaceBefore=3.5, spaceAfter=0),
+    "toc1": _ps("toc1", fontSize=8.2, leading=10, leftIndent=16, textColor=INK, spaceAfter=0),
     "cap": _ps("cap", fontSize=8, leading=10.5, textColor=DIM, alignment=TA_CENTER, spaceBefore=2, spaceAfter=8),
     "tag": _ps("tag", fontName="Helvetica-Bold", fontSize=8.5, leading=11, textColor=AMBER_D, spaceAfter=3),
     "goal": _ps("goal", fontName="Helvetica-Oblique", fontSize=10, leading=14, textColor=INDIGO2, spaceAfter=5),
@@ -169,6 +169,10 @@ class PSDoc(BaseDocTemplate):
             PageTemplate("body", frames=[body], onPageEnd=self._page),
             PageTemplate("part", frames=[part], onPage=self._part),
         ])
+
+    def _startBuild(self, *a, **k):
+        self.chapter = ""
+        return super()._startBuild(*a, **k)
 
     def _cover(self, c, doc):
         if self.cover_cb:
@@ -369,7 +373,27 @@ def node_diagram(width, height, wires, title=None, compact=False, subs=True, act
     centres = []
     for i in range(7):
         centres.append((cx[i] * width, height - cy[i] * height * 0.86 - (14 if title else 0) * 0 - 4))
-    # wires first
+    used = set()
+    for (a, b) in wires:
+        used.add(a); used.add(b)
+    show_all = not wires
+
+    def node(i, dim):
+        x, y = centres[i]
+        _rr(d, x - nw / 2, y - nh / 2, nw, nh, fill=UI_HI if not dim else UI_PANEL, stroke=NODE_COLS[i] if not dim else UI_LINE, sw=1.1, r=4)
+        tc = UI_TEXT if not dim else UI_LINE
+        _s(d, x - nw / 2 + 4, y + (1 if compact else 3), NODE_NAMES[i], size=6 if compact else 7.6, bold=True, color=tc)
+        if subs and not compact:
+            _s(d, x - nw / 2 + 4, y - 9, NODE_SUB[i], size=5.8, color=UI_DIM if not dim else UI_LINE)
+        pc = NODE_COLS[i] if not dim else UI_LINE
+        if i != 6:
+            d.add(Circle(x + nw / 2, y, 2.6 if compact else 3.2, fillColor=UI_PANEL, strokeColor=pc, strokeWidth=1))
+        if i >= 3:
+            d.add(Circle(x - nw / 2, y, 2.6 if compact else 3.2, fillColor=UI_PANEL, strokeColor=pc, strokeWidth=1))
+
+    for i in range(7):                      # unused nodes first, dimmed, so wires pass in front of them
+        if i not in used and not show_all:
+            node(i, True)
     for (s, dn) in wires:
         a = (centres[s][0] + nw / 2, centres[s][1])
         b = (centres[dn][0] - nw / 2, centres[dn][1])
@@ -377,17 +401,11 @@ def node_diagram(width, height, wires, title=None, compact=False, subs=True, act
         pts = _bezier(a, (a[0] + dx, a[1]), (b[0] - dx, b[1]), b)
         col = NODE_COLS[s] if s != 6 else CYAN
         d.add(PolyLine(pts, strokeColor=col, strokeWidth=1.8 if not compact else 1.2, strokeOpacity=0.9))
-    for i, (x, y) in enumerate(centres):
-        _rr(d, x - nw / 2, y - nh / 2, nw, nh, fill=UI_HI, stroke=NODE_COLS[i], sw=1.1, r=4)
-        _s(d, x - nw / 2 + 4, y + (1 if compact else 3), NODE_NAMES[i], size=6 if compact else 7.6, bold=True)
-        if subs and not compact:
-            _s(d, x - nw / 2 + 4, y - 9, NODE_SUB[i], size=5.8, color=UI_DIM)
-        if i != 6:
-            d.add(Circle(x + nw / 2, y, 2.6 if compact else 3.2, fillColor=UI_PANEL, strokeColor=NODE_COLS[i], strokeWidth=1))
-        if i >= 3:
-            d.add(Circle(x - nw / 2, y, 2.6 if compact else 3.2, fillColor=UI_PANEL, strokeColor=NODE_COLS[i], strokeWidth=1))
+    for i in range(7):
+        if i in used or show_all:
+            node(i, False)
     if title:
-        _s(d, 6, height - 10, title, size=6.6 if compact else 8, color=UI_DIM, bold=True)
+        _s(d, width - 8, height - 10, title, size=6.6 if compact else 8, color=UI_DIM, bold=True, anchor="end")
     return d
 
 
