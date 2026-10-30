@@ -1,0 +1,47 @@
+name: Build Massive PSXL (macOS arm64)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14            # Apple Silicon (M1) runner
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build plug-ins, standalone and engine test
+        run: cmake --build build --config Release --parallel
+
+      - name: Run offline engine test
+        run: |
+          TEST=$(find build -name psxl_test -type f -perm +111 | head -n 1)
+          echo "Running $TEST"
+          "$TEST" "$RUNNER_TEMP/psxl_test_audio"
+
+      - name: Package installer
+        run: bash installer/build_installer.sh build
+
+      - name: Validate Audio Unit (auval)
+        continue-on-error: true
+        run: |
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R "build/MassivePSXL_artefacts/Release/AU/Massive PSXL.component" ~/Library/Audio/Plug-Ins/Components/
+          codesign --force --deep --sign - ~/Library/Audio/Plug-Ins/Components/"Massive PSXL.component"
+          auval -v aumu Psxl PhSA
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Massive-PSXL-macOS-arm64
+          path: |
+            dist/*.pkg
+            dist/*.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-test-audio
+          path: ${{ runner.temp }}/psxl_test_audio

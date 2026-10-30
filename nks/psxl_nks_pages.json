@@ -1,0 +1,311 @@
+{
+  "_note": "Provisional NKS parameter page map for Massive PSXL. Feed this into the NKS Developer Kit tooling (nksf/NICA page definitions). Macro parameters change name at runtime; the host-visible parameter name is the live label.",
+  "plugin": "Massive PSXL",
+  "vendor": "Phil S Audio",
+  "pluginIds": {
+    "manufacturer": "PhSA",
+    "plugin": "Psxl"
+  },
+  "categories": [
+    "Bass",
+    "Leads",
+    "Pads",
+    "Plucks",
+    "Keys",
+    "Drums",
+    "FX",
+    "Sequence"
+  ],
+  "pages": [
+    {
+      "name": "Macros 1-8",
+      "parameters": [
+        "macro1",
+        "macro2",
+        "macro3",
+        "macro4",
+        "macro5",
+        "macro6",
+        "macro7",
+        "macro8"
+      ]
+    },
+    {
+      "name": "Macros 9-16",
+      "parameters": [
+        "macro9",
+        "macro10",
+        "macro11",
+        "macro12",
+        "macro13",
+        "macro14",
+        "macro15",
+        "macro16"
+      ]
+    },
+    {
+      "name": "Oscillator 1",
+      "parameters": [
+        "o1_pos",
+        "o1_pitch",
+        "o1_fine",
+        "o1_level",
+        "o1_uni",
+        "o1_detune",
+        "o1_pm",
+        "o1_fold"
+      ]
+    },
+    {
+      "name": "Oscillator 2",
+      "parameters": [
+        "o2_pos",
+        "o2_pitch",
+        "o2_fine",
+        "o2_level",
+        "o2_uni",
+        "o2_detune",
+        "o2_pm",
+        "o2_fold"
+      ]
+    },
+    {
+      "name": "Noise + Filter 1",
+      "parameters": [
+        "n_level",
+        "n_color",
+        "f1_cut",
+        "f1_res",
+        "f1_drive",
+        "f1_ktr",
+        "f1_model",
+        "f1_mode"
+      ]
+    },
+    {
+      "name": "Filter 2",
+      "parameters": [
+        "f2_cut",
+        "f2_res",
+        "f2_drive",
+        "f2_ktr",
+        "f2_model",
+        "f2_mode",
+        "n_type",
+        "pitch"
+      ]
+    },
+    {
+      "name": "Insert + Amp",
+      "parameters": [
+        "ins_type",
+        "ins_drive",
+        "ins_mix",
+        "amp_level",
+        "amp_pan",
+        "amp_fb",
+        "master_vol",
+        "vel_sens"
+      ]
+    },
+    {
+      "name": "Voice",
+      "parameters": [
+        "voice_mode",
+        "voices",
+        "glide",
+        "glide_expo",
+        "bend_range",
+        "o1_wt",
+        "o2_wt",
+        "pitch"
+      ]
+    },
+    {
+      "name": "Amp Envelope",
+      "parameters": [
+        "m1_dly",
+        "m1_att",
+        "m1_hold",
+        "m1_dec",
+        "m1_sus",
+        "m1_rel",
+        "m1_level",
+        "m1_oneshot"
+      ]
+    },
+    {
+      "name": "Mod 2",
+      "parameters": [
+        "m2_type",
+        "m2_att",
+        "m2_dec",
+        "m2_sus",
+        "m2_rel",
+        "m2_rate",
+        "m2_shape",
+        "m2_level"
+      ]
+    },
+    {
+      "name": "Mod 3",
+      "parameters": [
+        "m3_type",
+        "m3_att",
+        "m3_dec",
+        "m3_sus",
+        "m3_rel",
+        "m3_rate",
+        "m3_shape",
+        "m3_level"
+      ]
+    },
+    {
+      "name": "Mod 4",
+      "parameters": [
+        "m4_type",
+        "m4_att",
+        "m4_dec",
+        "m4_sus",
+        "m4_rel",
+        "m4_rate",
+        "m4_shape",
+        "m4_level"
+      ]
+    },
+    {
+      "name": "Mod 5",
+      "parameters": [
+        "m5_type",
+        "m5_att",
+        "m5_dec",
+        "m5_sus",
+        "m5_rel",
+        "m5_rate",
+        "m5_shape",
+        "m5_level"
+      ]
+    },
+    {
+      "name": "Mod 6",
+      "parameters": [
+        "m6_type",
+        "m6_att",
+        "m6_dec",
+        "m6_sus",
+        "m6_rel",
+        "m6_rate",
+        "m6_shape",
+        "m6_level"
+      ]
+    },
+    {
+      "name": "Mod 7",
+      "parameters": [
+        "m7_type",
+        "m7_att",
+        "m7_dec",
+        "m7_sus",
+        "m7_rel",
+        "m7_rate",
+        "m7_shape",
+        "m7_level"
+      ]
+    },
+    {
+      "name": "Mod 8",
+      "parameters": [
+        "m8_type",
+        "m8_att",
+        "m8_dec",
+        "m8_sus",
+        "m8_rel",
+        "m8_rate",
+        "m8_shape",
+        "m8_level"
+      ]
+    },
+    {
+      "name": "Mod 9",
+      "parameters": [
+        "m9_type",
+        "m9_att",
+        "m9_dec",
+        "m9_sus",
+        "m9_rel",
+        "m9_rate",
+        "m9_shape",
+        "m9_level"
+      ]
+    },
+    {
+      "name": "Performer 1",
+      "parameters": [
+        "p1_steps",
+        "p1_rate",
+        "p1_sync",
+        "p1_div",
+        "p1_smooth"
+      ]
+    },
+    {
+      "name": "Performer 2",
+      "parameters": [
+        "p2_steps",
+        "p2_rate",
+        "p2_sync",
+        "p2_div",
+        "p2_smooth"
+      ]
+    },
+    {
+      "name": "Performer 3",
+      "parameters": [
+        "p3_steps",
+        "p3_rate",
+        "p3_sync",
+        "p3_div",
+        "p3_smooth"
+      ]
+    },
+    {
+      "name": "EQ",
+      "parameters": [
+        "eq_lo_g",
+        "eq_lo_f",
+        "eq_mid_g",
+        "eq_mid_f",
+        "eq_mid_q",
+        "eq_hi_g",
+        "eq_hi_f",
+        "dist_mix"
+      ]
+    },
+    {
+      "name": "Delay + Reverb",
+      "parameters": [
+        "dly_time",
+        "dly_fb",
+        "dly_mix",
+        "dly_sync",
+        "rev_size",
+        "rev_damp",
+        "rev_mix",
+        "dist_drive"
+      ]
+    },
+    {
+      "name": "Chorus + Dist",
+      "parameters": [
+        "cho_rate",
+        "cho_depth",
+        "cho_mix",
+        "dist_drive",
+        "dist_mix",
+        "dly_div",
+        "ins_type",
+        "amp_pan"
+      ]
+    }
+  ]
+}
